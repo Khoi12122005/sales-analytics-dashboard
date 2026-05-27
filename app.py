@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 from datetime import datetime
+import os
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 import streamlit as st
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 from src.data_cleaning import clean_sales_data
 from src.data_loader import CANONICAL_COLUMNS, DataLoaderError, get_db_config, load_sales_data
@@ -25,17 +28,71 @@ PLOTLY_CONFIG = {
     "modeBarButtonsToRemove": ["lasso2d", "select2d"],
 }
 
+IS_VERCEL_RUNTIME = bool(os.getenv("VERCEL")) or bool(os.getenv("VERCEL_ENV"))
 
-st.set_page_config(
-    page_title="Sales Analytics Dashboard",
-    page_icon="SA",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+# Vercel-compatible ASGI entrypoint.
+app = FastAPI(title="Sales Analytics Dashboard")
 
-st.markdown(
+
+@app.get("/", response_class=HTMLResponse)
+def vercel_landing() -> str:
+    return """
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Sales Analytics Dashboard</title>
+        <style>
+          body { font-family: Inter, Segoe UI, Arial, sans-serif; background:#f6f8fc; margin:0; color:#0f172a; }
+          .wrap { max-width: 820px; margin: 48px auto; padding: 0 20px; }
+          .card { background:#fff; border:1px solid #dbe5f1; border-radius:14px; padding:24px; box-shadow:0 8px 20px rgba(15,23,42,.05); }
+          h1 { margin:0 0 10px; font-size:1.8rem; }
+          p { color:#334155; line-height:1.55; }
+          .chip { display:inline-block; background:#e6fffa; border:1px solid #99f6e4; color:#115e59; border-radius:999px; padding:6px 12px; margin:0 8px 8px 0; font-size:.78rem; font-weight:700; }
+          a.btn { display:inline-block; margin-top:12px; margin-right:8px; text-decoration:none; background:#0f766e; color:#fff; padding:10px 14px; border-radius:10px; font-weight:700; }
+          a.btn.secondary { background:#0f172a; }
+        </style>
+      </head>
+      <body>
+        <div class="wrap">
+          <div class="card">
+            <h1>Sales Analytics Dashboard</h1>
+            <p>
+              This project is built with Streamlit for interactive analytics workflows.
+              The Vercel deployment provides this lightweight landing endpoint while the
+              full dashboard runtime is executed via Streamlit environment.
+            </p>
+            <span class="chip">BA Portfolio Project</span>
+            <span class="chip">Pandas + Streamlit + Plotly</span>
+            <span class="chip">Excel Reporting + MySQL</span>
+            <p>
+              <a class="btn" href="https://github.com/Khoi12122005/sales-analytics-dashboard" target="_blank" rel="noreferrer">View Source Code</a>
+              <a class="btn secondary" href="https://github.com/Khoi12122005/sales-analytics-dashboard#run-locally-vs-code" target="_blank" rel="noreferrer">Run Locally</a>
+            </p>
+          </div>
+        </div>
+      </body>
+    </html>
     """
-    <style>
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    return {"status": "ok", "service": "sales-analytics-dashboard-vercel-entry"}
+
+
+if not IS_VERCEL_RUNTIME:
+    st.set_page_config(
+        page_title="Sales Analytics Dashboard",
+        page_icon="SA",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+
+    st.markdown(
+        """
+        <style>
     @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap');
 
     :root {
@@ -281,10 +338,10 @@ st.markdown(
         border-radius: 12px;
         overflow: hidden;
     }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def _render_hero() -> None:
@@ -438,6 +495,9 @@ def _filter_data(clean_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, list[s
 
 
 def main() -> None:
+    if IS_VERCEL_RUNTIME:
+        return
+
     _render_hero()
 
     st.sidebar.markdown("## Control Center")

@@ -26,3 +26,4 @@ reports/*.log
 Thumbs.db
 .vscode/
 .idea/
+.vercel

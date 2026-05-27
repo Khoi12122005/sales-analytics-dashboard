@@ -1,6 +1,12 @@
-# Sales Analytics Dashboard
+ï»¿# Sales Analytics Dashboard
 
 A portfolio-grade analytics application that demonstrates **Business Analysis thinking + Python engineering execution** from raw sales files to decision-ready insights.
+
+## Live Demo
+- Vercel landing page: `https://sales-analytics-dashboard-ochre.vercel.app`
+- Health endpoint: `https://sales-analytics-dashboard-ochre.vercel.app/health`
+- GitHub repository: `https://github.com/Khoi12122005/sales-analytics-dashboard`
+
 
 ## What This Project Delivers
 - Upload and analyze sales data from `.csv`, `.xlsx`, `.xls`
@@ -45,20 +51,20 @@ sales-analytics-dashboard/
 +-- README.md
 +-- .env.example
 +-- .streamlit/
-¦   +-- config.toml
+Â¦   +-- config.toml
 +-- data/
-¦   +-- sample_sales_data.xlsx
+Â¦   +-- sample_sales_data.xlsx
 +-- src/
-¦   +-- data_loader.py
-¦   +-- data_cleaning.py
-¦   +-- kpi_calculator.py
-¦   +-- visualization.py
-¦   +-- report_exporter.py
+Â¦   +-- data_loader.py
+Â¦   +-- data_cleaning.py
+Â¦   +-- kpi_calculator.py
+Â¦   +-- visualization.py
+Â¦   +-- report_exporter.py
 +-- reports/
 +-- docs/
-¦   +-- business_requirement.md
-¦   +-- use_case.md
-¦   +-- test_cases.md
+Â¦   +-- business_requirement.md
+Â¦   +-- use_case.md
+Â¦   +-- test_cases.md
 +-- tests/
     +-- test_data_cleaning.py
     +-- test_kpi_calculator.py
@@ -135,3 +141,4 @@ If you still want Vercel in the workflow, use it for a landing page that links t
 
 ## Author
 Developed as a practical BA + Python portfolio project focused on real business reporting workflows.
+

@@ -3,10 +3,12 @@
 A portfolio-grade analytics application that demonstrates **Business Analysis thinking + Python engineering execution** from raw sales files to decision-ready insights.
 
 ## Live Demo
-- Vercel landing page: `https://sales-analytics-dashboard-ochre.vercel.app`
-- Health endpoint: `https://sales-analytics-dashboard-ochre.vercel.app/health`
-- GitHub repository: `https://github.com/Khoi12122005/sales-analytics-dashboard`
+- [Vercel Landing Page](https://sales-analytics-dashboard-ochre.vercel.app)
+- [Health Endpoint](https://sales-analytics-dashboard-ochre.vercel.app/health)
+- [GitHub Repository](https://github.com/Khoi12122005/sales-analytics-dashboard)
 
+> Note: The Vercel URL is a **landing/API endpoint**, not the full Streamlit runtime.  
+> The interactive dashboard is designed to run via `streamlit run app.py` (or Streamlit-native hosting).
 
 ## What This Project Delivers
 - Upload and analyze sales data from `.csv`, `.xlsx`, `.xls`
@@ -46,29 +48,29 @@ This project is designed for **BA/IT portfolio presentation** and shows:
 ## Repository Structure
 ```text
 sales-analytics-dashboard/
-+-- app.py
-+-- requirements.txt
-+-- README.md
-+-- .env.example
-+-- .streamlit/
-¦   +-- config.toml
-+-- data/
-¦   +-- sample_sales_data.xlsx
-+-- src/
-¦   +-- data_loader.py
-¦   +-- data_cleaning.py
-¦   +-- kpi_calculator.py
-¦   +-- visualization.py
-¦   +-- report_exporter.py
-+-- reports/
-+-- docs/
-¦   +-- business_requirement.md
-¦   +-- use_case.md
-¦   +-- test_cases.md
-+-- tests/
-    +-- test_data_cleaning.py
-    +-- test_kpi_calculator.py
-    +-- test_report_exporter.py
+├── app.py
+├── requirements.txt
+├── README.md
+├── .env.example
+├── .streamlit/
+│   └── config.toml
+├── data/
+│   └── sample_sales_data.xlsx
+├── src/
+│   ├── data_loader.py
+│   ├── data_cleaning.py
+│   ├── kpi_calculator.py
+│   ├── visualization.py
+│   └── report_exporter.py
+├── reports/
+├── docs/
+│   ├── business_requirement.md
+│   ├── use_case.md
+│   └── test_cases.md
+└── tests/
+    ├── test_data_cleaning.py
+    ├── test_kpi_calculator.py
+    └── test_report_exporter.py
 ```
 
 ## Data Cleaning Rules (Core Contract)
@@ -132,13 +134,10 @@ Located in `docs/`:
 ## Deployment Note
 This app is a **Streamlit server app**. Vercel is optimized for serverless web functions and is not a native host for long-running Streamlit services.
 
-Recommended production/demo hosting for this project:
+Recommended production/demo hosting for full dashboard runtime:
 - Streamlit Community Cloud
 - Render
 - Railway
 
-If you still want Vercel in the workflow, use it for a landing page that links to the live Streamlit instance.
-
 ## Author
 Developed as a practical BA + Python portfolio project focused on real business reporting workflows.
-

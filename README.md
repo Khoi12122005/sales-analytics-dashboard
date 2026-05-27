@@ -3,12 +3,14 @@
 A portfolio-grade analytics application that demonstrates **Business Analysis thinking + Python engineering execution** from raw sales files to decision-ready insights.
 
 ## Live Demo
+- [Full Streamlit Dashboard (temporary public URL)](https://mighty-resolve-univ-trek.trycloudflare.com)
 - [Vercel Landing Page](https://sales-analytics-dashboard-ochre.vercel.app)
 - [Health Endpoint](https://sales-analytics-dashboard-ochre.vercel.app/health)
 - [GitHub Repository](https://github.com/Khoi12122005/sales-analytics-dashboard)
 
-> Note: The Vercel URL is a **landing/API endpoint**, not the full Streamlit runtime.  
-> The interactive dashboard is designed to run via `streamlit run app.py` (or Streamlit-native hosting).
+> Note: The `trycloudflare` link above is a temporary public URL for the full Streamlit runtime.
+> If it expires, run `scripts/start_public_demo.ps1` to generate a new public URL instantly.
+> The Vercel URL is a landing/API endpoint, not the full Streamlit runtime.
 
 ## What This Project Delivers
 - Upload and analyze sales data from `.csv`, `.xlsx`, `.xls`
